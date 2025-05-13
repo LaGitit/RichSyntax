@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { FiDownload, FiX } from "react-icons/fi";
 import { Document, Page, pdfjs } from "react-pdf";
 import Image from "next/image";
@@ -23,6 +23,8 @@ export default function Certificates() {
   const [activeCert, setActiveCert] = useState<Certificate | null>(null);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageWidth, setPageWidth] = useState(800);
+  const controls = useAnimation(); // Add this line
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     setPageWidth(Math.min(800, window.innerWidth - 64));
@@ -46,6 +48,21 @@ export default function Certificates() {
       inProgress: true,
     },
   ];
+
+  useEffect(() => {
+    const handleScrollHint = async () => {
+      if (window.innerWidth < 768 && !hasAnimated) {
+        await controls.start({
+          x: [-20, 20, -10, 10, 0],
+          transition: { duration: 1.5 },
+        });
+        setHasAnimated(true);
+      }
+    };
+
+    const timer = setTimeout(handleScrollHint, 1000);
+    return () => clearTimeout(timer);
+  }, [controls, hasAnimated]);
 
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
@@ -86,7 +103,7 @@ export default function Certificates() {
         <div className="absolute left-4 top-14 h-0.5 w-[calc(100%-2rem)] bg-accent/20 z-0" />
 
         <div className="relative overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide">
-          <div className="flex gap-8 w-max px-4">
+          <motion.div className="flex gap-8 w-max px-4" animate={controls}>
             {certificates.map((cert, index) => (
               <motion.div
                 key={cert.id}
@@ -172,7 +189,7 @@ export default function Certificates() {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 

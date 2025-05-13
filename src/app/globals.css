@@ -64,6 +64,24 @@ section {
   height: 100%;
 }
 
+@media (max-width: 768px) {
+  canvas[aria-label*="radar"] ~ div text {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+
+  .chartjs-radar canvas ~ div text {
+    white-space: pre !important;
+    word-break: break-word !important;
+  }
+
+  .radar-container {
+    padding: 1rem !important;
+    margin: 0 -0.5rem;
+    width: calc(100% + 1rem);
+  }
+}
+
 .chartjs-render-monitor {
   animation: fadeIn 1s ease-out;
 }

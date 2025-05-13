@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import type { TooltipItem } from "chart.js";
 
 const Radar = dynamic(
@@ -29,14 +29,22 @@ ChartJS.register(
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const skillData = {
     labels: [
-      "Advanced JavaScript & React Ecosystem",
-      "UI/UX & Design Systems",
+      "Advanced JavaScript &\nReact Ecosystem",
+      "UI/UX &\nDesign Systems",
       "TypeScript",
-      "Economic Logic",
-      "ACCA Awareness",
+      "Economic\nLogic",
+      "ACCA\nAwareness",
     ],
     datasets: [
       {
@@ -52,6 +60,8 @@ export default function About() {
   };
 
   const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
     tooltip: {
       backgroundColor: "var(--color-primary)",
       borderColor: "var(--color-accent)",
@@ -72,7 +82,13 @@ export default function About() {
         suggestedMax: 100,
         pointLabels: {
           color: "#e6e6e6",
-          font: { family: "'Inter', sans-serif" },
+          font: {
+            family: "'Inter', sans-serif",
+            size: isMobile ? 10 : 12,
+          },
+          callback: function (value: string) {
+            return value;
+          },
         },
       },
     },
@@ -144,7 +160,7 @@ export default function About() {
                   <span className="text-accent font-medium">Economist</span>{" "}
                   with a BSc and a growing background in accounting through the{" "}
                   <span className="text-accent font-medium">ACCA program</span>.
-                  I’m also a{" "}
+                  I`m also a{" "}
                   <span className="text-accent font-medium">
                     frontend developer
                   </span>{" "}
@@ -152,7 +168,7 @@ export default function About() {
                   performant, thoughtful user interfaces.
                 </p>
                 <p className="text-gray-300">
-                  My strengths lie in clarity, precision, and growth. I don’t
+                  My strengths lie in clarity, precision, and growth. I don`t
                   blend economics, accounting, and tech into one concept—but I
                   do believe in the power of being skilled across domains, ready
                   to connect them when needed.
@@ -184,22 +200,22 @@ export default function About() {
             </div>
 
             <div className="relative">
-              {/* Radar Chart */}
               <motion.div
                 initial={{ rotate: 10, opacity: 0 }}
                 whileInView={{ rotate: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring" }}
-                className="bg-primary/20 p-6 rounded-xl border border-gray-800/50 backdrop-blur-sm min-w-[340px] sm:min-w-[auto]"
+                className="bg-primary/20 p-4 md:p-6 rounded-xl border border-gray-800/50 backdrop-blur-sm w-full overflow-hidden radar-chart-container"
               >
-                <Radar
-                  data={skillData}
-                  options={chartOptions}
-                  className="max-h-[400px]"
-                />
+                <div className="relative w-full h-[300px] md:h-[350px]">
+                  <Radar
+                    data={skillData}
+                    options={chartOptions}
+                    className="w-full h-full"
+                  />
+                </div>
               </motion.div>
 
-              {/* Portrait */}
               <motion.div
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
@@ -209,7 +225,7 @@ export default function About() {
                   boxShadow: "0 0 0 2px var(--color-accent)",
                 }}
                 viewport={{ once: true }}
-                className="absolute -bottom-16 -right-16 w-32 h-32"
+                className="absolute -bottom-12 -right-12 w-24 h-24 md:-bottom-16 md:-right-16 md:w-32 md:h-32"
               >
                 <div
                   className="w-full h-full bg-gray-700 rounded-full overflow-hidden clip-path-circle-40 border-2 border-accent/30 hover:border-accent/60 transition-all"
