@@ -20,7 +20,7 @@ const ReCAPTCHA = dynamic(
 
 export default function Contact() {
   const [isHydrated, setIsHydrated] = useState(false);
-  const recaptchaRef = useRef<any>(null);
+  const recaptchaRef = useRef<ReCAPTCHAType | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
