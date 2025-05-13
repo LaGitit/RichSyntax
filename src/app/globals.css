@@ -1,26 +1,120 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-accent: #4db5ff;
+  --color-primary: #0d0d0d;
+  --color-text: #e6e6e6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.font-sans {
+  font-family: var(--font-inter), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
+.font-orbitron {
+  font-family: var(--font-orbitron), monospace;
+}
+
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-accent: #4db5ff;
+    --color-primary: #0d0d0d;
+    --color-text: #e6e6e6;
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+  }
+
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+
+  .text-text {
+    color: var(--color-text);
+  }
+
+  .border-accent {
+    border-color: var(--color-accent);
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-family: var(--font-inter), sans-serif;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.clip-path-circle-40 {
+  clip-path: circle(40% at 50% 50%);
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+#tsparticles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.chartjs-render-monitor {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.clip-path-circle-40::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border: 2px solid #4db5ff;
+  border-radius: 50%;
+  clip-path: circle(40% at 50% 50%);
+}
+
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05) translateZ(0);
+}
+
+.motion-div {
+  transform: translateZ(0);
+}
+
+.project-card {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
 }
