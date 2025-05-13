@@ -1,15 +1,23 @@
 "use client";
 import { TypeAnimation } from "react-type-animation";
 import { motion, useMotionValue } from "framer-motion";
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Particles from "react-tsparticles";
 import { loadSlim } from "tsparticles-slim";
 import type { Engine } from "tsparticles-engine";
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false);
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return window.removeEventListener("resize", checkMobile);
+  });
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -26,7 +34,7 @@ export default function Hero() {
         init={particlesInit}
         options={{
           particles: {
-            number: { value: 50 },
+            number: { value: isMobile ? 20 : 50 },
             color: { value: "#4db5ff" },
             move: {
               speed: 0.3,

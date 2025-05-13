@@ -199,6 +199,7 @@ export default function About() {
               </div>
             </div>
 
+            {/* Radar chart */}
             <div className="relative">
               <motion.div
                 initial={{ rotate: 10, opacity: 0 }}

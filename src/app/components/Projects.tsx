@@ -65,7 +65,6 @@ export default function Projects() {
 
   return (
     <section id="projects" className="relative py-28 px-4 max-w-7xl mx-auto">
-      {/* Section header with animated gradient underline */}
       <motion.div className="mb-20">
         <motion.h2
           className="text-4xl font-orbitron mb-6"
@@ -110,7 +109,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       e.currentTarget.getBoundingClientRect();
     mouseX.set(e.clientX - left);
     mouseY.set(e.clientY - top);
-    // Reduced tilt intensity by 60% (from /10 to /25)
+
     rotateX.set((e.clientY - top - height / 2) / 25);
     rotateY.set(-(e.clientX - left - width / 2) / 25);
   };
@@ -193,7 +192,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 {project.description}
               </p>
 
-              {/* Key insight with animated underline */}
+              {/* Key insight */}
               <motion.div className="mb-4" whileHover={{ x: 5 }}>
                 <p className="text-accent text-sm font-medium">
                   {project.insight}
