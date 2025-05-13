@@ -52,7 +52,7 @@ export default function Hero() {
         transition={{ delay: 0.3 }}
       >
         <motion.div
-          className="flex items-center font-mono text-xl md:text-2xl text-accent cursor-default"
+          className="flex items-center font-mono text-base sm:text-lg md:text-2xl text-accent cursor-default"
           onMouseMove={handleMouseMove}
           whileHover={{ scale: 1.05 }}
         >

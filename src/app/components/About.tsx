@@ -190,7 +190,7 @@ export default function About() {
                 whileInView={{ rotate: 0, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring" }}
-                className="bg-primary/20 p-6 rounded-xl border border-gray-800/50 backdrop-blur-sm"
+                className="bg-primary/20 p-6 rounded-xl border border-gray-800/50 backdrop-blur-sm min-w-[340px] sm:min-w-[auto]"
               >
                 <Radar
                   data={skillData}
