@@ -34,7 +34,7 @@ export default function Hero() {
         init={particlesInit}
         options={{
           particles: {
-            number: { value: isMobile ? 20 : 50 },
+            number: { value: isMobile ? 17 : 40 },
             color: { value: "#4db5ff" },
             move: {
               speed: 0.3,

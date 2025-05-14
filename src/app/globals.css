@@ -65,20 +65,16 @@ section {
 }
 
 @media (max-width: 768px) {
-  canvas[aria-label*="radar"] ~ div text {
+  .radar-chart-container text {
+    dominant-baseline: middle !important;
+    text-anchor: start !important;
     white-space: normal !important;
-    word-break: break-word !important;
+    word-spacing: normal !important;
+    letter-spacing: normal !important;
   }
 
-  .chartjs-radar canvas ~ div text {
-    white-space: pre !important;
-    word-break: break-word !important;
-  }
-
-  .radar-container {
+  .radar-chart-container {
     padding: 1rem !important;
-    margin: 0 -0.5rem;
-    width: calc(100% + 1rem);
   }
 }
 
@@ -135,4 +131,18 @@ section {
 }
 .animate-spin-slow {
   animation: spin-slow 8s linear infinite;
+}
+
+@keyframes checkmark {
+  from {
+    stroke-dashoffset: 20;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.checkmark-animation path {
+  stroke-dasharray: 20;
+  animation: checkmark 0.5s ease-in-out forwards;
 }

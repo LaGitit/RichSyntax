@@ -41,10 +41,10 @@ export default function About() {
   const skillData = {
     labels: [
       "Advanced JavaScript &\nReact Ecosystem",
-      "UI/UX &\nDesign Systems",
+      isMobile ? "UI/UX Design" : "UI/UX &\nDesign Systems",
       "TypeScript",
       "Economic\nLogic",
-      "ACCA\nAwareness",
+      isMobile ? "ACCA" : "ACCA\nAwareness",
     ],
     datasets: [
       {

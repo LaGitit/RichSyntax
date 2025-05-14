@@ -53,14 +53,18 @@ export default function Certificates() {
     const handleScrollHint = async () => {
       if (window.innerWidth < 768 && !hasAnimated) {
         await controls.start({
-          x: [-20, 20, -10, 10, 0],
-          transition: { duration: 1.5 },
+          x: ["0%", "-20%", "0%", "-15%", "0%"],
+          transition: {
+            duration: 1.2,
+            times: [0, 0.3, 0.5, 0.8, 1],
+            ease: "easeInOut",
+          },
         });
         setHasAnimated(true);
       }
     };
 
-    const timer = setTimeout(handleScrollHint, 1000);
+    const timer = setTimeout(handleScrollHint, 1500);
     return () => clearTimeout(timer);
   }, [controls, hasAnimated]);
 
@@ -103,7 +107,12 @@ export default function Certificates() {
         <div className="absolute left-4 top-14 h-0.5 w-[calc(100%-2rem)] bg-accent/20 z-0" />
 
         <div className="relative overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide">
-          <motion.div className="flex gap-8 w-max px-4" animate={controls}>
+          <motion.div
+            className="flex gap-8 w-max px-4"
+            animate={controls}
+            initial={false}
+            viewport={{ once: true, margin: "-30px 0px -30px 0px" }}
+          >
             {certificates.map((cert, index) => (
               <motion.div
                 key={cert.id}

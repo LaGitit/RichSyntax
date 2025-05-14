@@ -170,7 +170,6 @@ export default function Contact() {
               ) : null}
             </div>
           ))}
-
           <div className="mt-4">
             {isHydrated && process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
               <ReCAPTCHA
@@ -200,7 +199,7 @@ export default function Contact() {
             disabled={isSubmitting || !isHydrated}
             whileHover={isHydrated ? { scale: 1.02 } : {}}
             whileTap={isHydrated ? { scale: 0.98 } : {}}
-            className="flex items-center justify-center gap-2 bg-accent text-primary px-6 py-3 rounded-md font-medium disabled:opacity-50 w-full"
+            className="flex items-center justify-center gap-2 bg-accent text-primary px-6 py-3 rounded-md font-medium disabled:opacity-50 w-full relative overflow-hidden"
           >
             {isSubmitting ? (
               <motion.span
@@ -216,6 +215,11 @@ export default function Contact() {
               </motion.span>
             ) : (
               <>
+                <motion.span
+                  initial={{ width: 0 }}
+                  animate={{ width: formik.isValid ? "100%" : 0 }}
+                  className="absolute bottom-0 left-0 h-1 bg-primary transition-colors"
+                />
                 <FiSend />
                 <span className="font-mono">EXECUTE</span>
               </>
