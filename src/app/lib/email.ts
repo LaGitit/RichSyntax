@@ -11,20 +11,17 @@ type EmailOptions = {
 export async function sendEmail({ subject, text, html }: EmailOptions) {
   try {
     const { data, error } = await resend.emails.send({
-      from: "Portfolio Contact https://richsyntax.vercel.app/",
-      to: process.env.CONTACT_EMAIL || "richardlawal2001@gmail.com",
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: process.env.CONTACT_EMAIL!,
       subject,
       text,
       html,
     });
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
+    if (error) throw error;
     return data;
   } catch (error) {
-    console.error("Email sending error:", error);
+    console.error("Email error:", error);
     throw error;
   }
 }

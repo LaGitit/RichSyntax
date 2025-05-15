@@ -6,17 +6,15 @@ export async function validateRecaptcha(token: string): Promise<boolean> {
       "https://www.google.com/recaptcha/api/siteverify",
       {
         method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${token}`,
       }
     );
 
     const data = await response.json();
-    return data.success === true && data.score >= 0.5;
+    return data.success === true;
   } catch (error) {
-    console.error("reCAPTCHA validation error:", error);
+    console.error("reCAPTCHA error:", error);
     return false;
   }
 }

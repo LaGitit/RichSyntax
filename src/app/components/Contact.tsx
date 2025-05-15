@@ -213,13 +213,19 @@ export default function Contact() {
               >
                 <FiSend />
               </motion.span>
+            ) : formik.isValid ? (
+              <>
+                <FiSend />
+                <span className="font-mono">EXECUTE</span>
+                <motion.div
+                  className="absolute inset-0 bg-green-500/20"
+                  initial={{ width: 0 }}
+                  animate={{ width: "100%" }}
+                  transition={{ duration: 2 }}
+                />
+              </>
             ) : (
               <>
-                <motion.span
-                  initial={{ width: 0 }}
-                  animate={{ width: formik.isValid ? "100%" : 0 }}
-                  className="absolute bottom-0 left-0 h-1 bg-primary transition-colors"
-                />
                 <FiSend />
                 <span className="font-mono">EXECUTE</span>
               </>
